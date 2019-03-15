@@ -1,22 +1,21 @@
 ﻿using System;
 using System.IO;
-
-namespace StreamReaderExercicio
+namespace Course
 {
     class Program
     {
         static void Main(string[] args)
         {
-            string path = @"c:\temp\file1.txt";
+            string path = @"c:\temp\sdfbra.txt";
+            FileStream fs = null;
             StreamReader sr = null;
             try
             {
-                sr = File.OpenText(path);
-                while (!sr.EndOfStream)
-                {
-                    string line = sr.ReadLine();
-                    Console.WriteLine(line);
-                }
+                fs = new FileStream(path, FileMode.Open); // File.OpenRead(path);
+                sr = new StreamReader(fs);
+                string line = sr.ReadLine();
+                Console.WriteLine(line);
+                Console.ReadLine();
             }
             catch (IOException e)
             {
@@ -26,6 +25,7 @@ namespace StreamReaderExercicio
             finally
             {
                 if (sr != null) sr.Close();
+                if (fs != null) fs.Close();
             }
         }
     }
